@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows.Automation;
 using Microsoft.VisualStudio.TestTools.UITest.Input;
 using Microsoft.VisualStudio.TestTools.UITesting;
@@ -113,26 +114,31 @@ namespace TestProject.Pages
 
         public void ClickTabMeasure()
         {
+            Console.WriteLine("Click on Tab Measure");
             TabMeasure.ClickPoint();
         }
 
         public void ClickTabAutomate()
         {
+            Console.WriteLine("Click on Tab Automate");
             TabAutomate.ClickPoint();
         }
         public void ClickTabAdjust()
         {
+            Console.WriteLine("Click on Tab Adjust");
             TabAdjust.ClickPoint();
         }
 
         public void ClickTabCapture()
         {
+            Console.WriteLine("Click on Tab Capture");
             TabCapture.WaitForControlEnabled();
             TabCapture.WaitForControlReady();
             TabCapture.ClickPoint();
         }
         public void ClickTabView()
         {
+            Console.WriteLine("Click on Tab View");
             TabView.ClickPoint();
         }
 
@@ -143,10 +149,12 @@ namespace TestProject.Pages
 
         public void ClickBtnNewProject()
         {
+            Console.WriteLine("Click on Button New Project");
             BtnNewProject.Click();
         }
         public void ClickBtnSaturation()
         {
+            Console.WriteLine("Click on Button Saturation");
             BtnSaturation.Click();
         }
         public void ClickBtnRecordMacro(MouseButtons action = MouseButtons.Left)
@@ -154,10 +162,12 @@ namespace TestProject.Pages
             switch(action)
             {
                 case MouseButtons.Left:
+                    Console.WriteLine("Click on Button Record Macro");
                     BtnRecordMacro.ClickPoint();
                     break;
 
                 case MouseButtons.Right:
+                    Console.WriteLine("Right Click on Button Macro");
                     BtnRecordMacro.ClickPoint_RightClick();
                     break;
             }
@@ -165,11 +175,13 @@ namespace TestProject.Pages
 
         public void ClickBtnRotate()
         {
+            Console.WriteLine("Click on Button Rotate");
             BtnRotate.Click();
         }
 
         public void ClickBtnCreate()
         {
+            Console.WriteLine("Click on Button Create");
             BtnCreate.Click();
         }
 
@@ -186,12 +198,10 @@ namespace TestProject.Pages
 
             WndRecordMacro.Fill(newMacroName);
             WndRecordMacro.ClickOk();
+            Console.WriteLine("Started Recording Macro: " + newMacroName);
+
         }
 
-        public bool CheckRecordedMacro(bool click = false)
-        {
-            return false;
-        }
         /// <summary>
         /// Enter or Exit Image Viewer Full Screen Mode
         /// </summary>
@@ -202,11 +212,14 @@ namespace TestProject.Pages
             if (!on)
             {
                 SetFocus();
+                Console.WriteLine("Exit Full screen mode");
                 Keyboard.SendKeys("{ESC}");
             }
             else if (BtnFullScreen.Enabled)
+            {
+                Console.WriteLine("Enter Full screen mode");
                 BtnFullScreen.Click();
-
+            }
             Thread.Sleep(3000);
         }
 
@@ -224,12 +237,18 @@ namespace TestProject.Pages
                 Mouse.HoverDuration = 1000;
                 Mouse.Hover(btnDisplayHelp);
                 Mouse.Click(btnDisplayHelp);
+                Console.WriteLine("Click on Button 'Help' for 'Display' control");
             }
             return btnDisplayHelp;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
         public void SelectRecordedMacro(string name)
         {
+            Console.WriteLine("Open Recorded Macro: " + name);
             ProjectExplorerSplitButton.Click();
 
             WinMenu uiContextMenu = new WinMenu(this);
@@ -241,29 +260,34 @@ namespace TestProject.Pages
             UIMenuItem.Click();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool CheckRecordedMacroExists(string name)
         {
             ProjectExplorerSplitButton.Click();
 
             WinMenu uiContextMenu = new WinMenu(this);
             uiContextMenu.WindowTitles.Add("Image-Pro");
-
+            Console.WriteLine("Check Recorded Macro: " + name);
 
             WinMenuItem UIMenuItem = new WinMenuItem(uiContextMenu);
             UIMenuItem.SearchProperties[UITestControl.PropertyNames.Name] = name;
             return UIMenuItem.Exists;
 
         }
-
-       
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void Select_NoToAll()
         {
             Thread.Sleep(500);
             WndImagePro image = new WndImagePro();
 
             WinWindow wnd = new WinWindow(image);
-
+            wnd.SearchProperties.Add(new PropertyExpression(WinControl.PropertyNames.Name, "Image-Pro", PropertyExpressionOperator.EqualTo));
             wnd.SearchProperties.Add(new PropertyExpression(WinControl.PropertyNames.ControlName, "CloseAllForm", PropertyExpressionOperator.EqualTo));
             if (wnd.Exists)
             {

@@ -1,4 +1,5 @@
-﻿using System.Drawing.Imaging;
+﻿using System;
+using System.Drawing.Imaging;
 using System.Windows.Input;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
@@ -29,6 +30,8 @@ namespace TestProject.Utilities
         /// </summary>
         public static void CloseWindow(this WinWindow window)
         {
+            string title = window.Name ?? "";
+            Console.WriteLine("Close window: " + title);
             window.SetFocus();
             Keyboard.SendKeys("{F4}", ModifierKeys.Alt);
         }
@@ -42,6 +45,7 @@ namespace TestProject.Utilities
         /// <param name="hover">True, hover on control</param>
         public static void CaptureImage(this UITestControl ctrl, string fullFilePath, ImageFormat format = null, bool hover = false)
         {
+            Console.WriteLine("Capturing Image: " + fullFilePath);
             format = format ?? ImageFormat.Jpeg;
             ctrl.SetFocus();
             if (hover)

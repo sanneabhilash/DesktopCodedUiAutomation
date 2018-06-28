@@ -43,7 +43,7 @@ namespace TestProject.TestScripts
             Console.WriteLine("Begin Execution: " + TestContext.TestName);
         }
 
-        [TestInitialize]
+        [TestCleanup]
         public void Cleanup()
         {
             Console.WriteLine("End Execution: " + TestContext.TestName);
@@ -55,8 +55,8 @@ namespace TestProject.TestScripts
         public void TestRecordMacroWithAction()
         {
             #region TestData
-            string imagesPath = @"C:\AutomationImages\" + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\";
-            string originalImage = @"C:\AutomationImages\Actual.jpg";
+            string imagesPath = FileUtilities.CheckAndCreateDirectory(testImagesPath + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\");
+            string originalImage = testImagesPath + "Actual.jpg";
             string runTimeImage1 = imagesPath + "First.jpg";
             string runTimeImage2 = imagesPath + "Second.jpg";
             string newMacroName = "AutoTest" + rand.Next(100, 999999);

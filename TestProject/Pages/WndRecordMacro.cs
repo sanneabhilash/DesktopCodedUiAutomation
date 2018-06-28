@@ -1,4 +1,5 @@
-﻿using System.Windows.Automation;
+﻿using System;
+using System.Windows.Automation;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using TestProject.Utilities;
@@ -54,6 +55,7 @@ namespace TestProject.Pages
         /// </summary>
         public void ClickOk()
         {
+            Console.WriteLine("Click 'OK' button in window Record Macro");
             BtnOk.Click();
         }
 

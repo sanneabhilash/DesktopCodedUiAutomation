@@ -18,9 +18,21 @@ namespace TestProject.Utilities
         {
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException("File '" + filePath + "' not found!");
+                return false;//throw new FileNotFoundException("File '" + filePath + "' not found!");
             }
             return true;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string CheckAndCreateDirectory(string filePath)
+        {
+            if (!Directory.Exists(filePath)){
+                Directory.CreateDirectory(filePath);
+            }
+            return filePath;
         }
 
         /// <summary>

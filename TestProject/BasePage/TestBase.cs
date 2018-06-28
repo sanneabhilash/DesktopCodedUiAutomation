@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Configuration;
 
 namespace TestProject.BasePage
 {
     [CodedUITest]
     public class TestBase
     {
+        public readonly string testImagesPath = System.IO.Path.GetFullPath(ConfigurationManager.AppSettings["ImagesPath"]);  //@"C:\AutomationImages\";
 
         [ClassInitialize]
         public void ClassSetup()

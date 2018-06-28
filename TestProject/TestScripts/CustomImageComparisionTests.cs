@@ -12,7 +12,7 @@ namespace TestProject.TestScripts
     {
         #region Fields
 
-        private string imagesPath = @"C:\AutomationImages\CustomImageComparisionTests\";
+        string imagesPath = FileUtilities.CheckAndCreateDirectory(testImagesPath + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\");
 
         #endregion
 

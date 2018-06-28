@@ -25,7 +25,7 @@ namespace TestProject.TestScripts
         [TestCleanup]
         public void TestCleanUp()
         {
-            wndImagePro.CloseAllToolsAndViews();
+            wndImagePro.CloseAllToolsAndViews(true);
         }
 
         [TestMethod, Description("Edit two images in same process and compare, Images should be identical")]
@@ -37,8 +37,8 @@ namespace TestProject.TestScripts
             Image image1, image2;
             bool compareWithZeroTolerance, compareWith100Tolerance;
             ColorDifference diff = new ColorDifference(0);
-            string imagesPath = @"C:\AutomationImages\" + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\";
-            string originalImage = imagesPath + "Actual.jpg";
+            string originalImage = testImagesPath + "Actual.jpg";
+            string imagesPath = FileUtilities.CheckAndCreateDirectory(testImagesPath + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\");
             string runTimeImage1 = imagesPath + "First.jpg";
             string runTimeImage2 = imagesPath + "Second.jpg";
 
@@ -116,10 +116,10 @@ namespace TestProject.TestScripts
             Compare two images with different threshold levels
             Test case should pass*/
 
-            #region Fields
+            #region TestData
             Image image1, image2, image3;
             ColorDifference diff = new ColorDifference(0);
-            string imagesPath = @"C:\AutomationImages\" + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\";
+            string imagesPath = FileUtilities.CheckAndCreateDirectory(testImagesPath + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\");
             bool compare;
             string originalImage = imagesPath + "Actual.jpg";
             string runTimeImage1 = imagesPath + "First.jpg";
@@ -202,12 +202,11 @@ namespace TestProject.TestScripts
         [TestMethod, Description("Transform Image Partially and compare, the comparision to match, test should fail")]
         public void TransformPartiallyAndCompare_ExpectedFail()
         {
-            #region Fields
+            #region TestData
             bool compare = false;
             Image image1;
             Image image2;
-            string imagesPath = @"C:\AutomationImages\" + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\";
-            ColorDifference diff = new ColorDifference(0);
+            string imagesPath = FileUtilities.CheckAndCreateDirectory(testImagesPath + System.Reflection.MethodBase.GetCurrentMethod().Name + @"\"); ColorDifference diff = new ColorDifference(0);
             string originalImage = imagesPath + "Actual.jpg";
             string runTimeImage1 = imagesPath + "First.jpg";
             string runTimeImage2 = imagesPath + "Second.jpg";
