@@ -1,2 +1,1 @@
-# MediacyTest
-Inprogress
+# DesktopCodedUiAutomation
